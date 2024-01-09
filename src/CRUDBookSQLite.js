@@ -2,7 +2,7 @@ const express = require('express');
 const sqlite3 = require('sqlite3');
 const app = express();
 
-const db = new sqlite3.Database('./Database/Books.sqlite');
+const db = new sqlite3.Database('./Database/Book.sqlite');
 
 app.use(express.json());
 
@@ -50,7 +50,7 @@ app.post('/books',(req,res) => {
 
 app.put('/books/:id',(req,res) => {
     const book = req.body;
-    db.run('UPDATE books SET title = ?, author = ? WHERE id = ?',book.title,book.author,req.params.id,function(err) {
+    db.run('UPDATE books SET title = ?, author = ? WHERE id = ?',book.title,book,author,req.params.id,function(err) {
         if (err) {
             res.status(500).send(err);
         } else {
@@ -70,4 +70,4 @@ app.delete('/books/:id',(req,res) => {
 });
 
 const port = process.env.PORT || 5000;
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
+app.listen(port, () => console.log(`Listening on port ${port}...`));
