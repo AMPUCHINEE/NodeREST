@@ -77,7 +77,7 @@ app.delete('/books/:id',(req,res) => {
         if (!book) {
             res.status(404).send('Book not found');
         } else {
-            bppk.destroy().then(() => {
+            book.destroy().then(() => {
                 res.send({});
             }).catch(err => {
                 res.status(500).send(err);
